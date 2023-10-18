@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CartView: View {
     
+    @EnvironmentObject var cartManager: CartManager
+    
     @Environment(\.presentationMode) var mode
     
     var body: some View {
@@ -25,7 +27,7 @@ struct CartView: View {
                         Button {
                             mode.wrappedValue.dismiss()
                         } label: {
-                            Text("3")
+                            Text("\(cartManager.products.count)")
                                 .imageScale(.large)
                                 .padding()
                                 .frame(width: 70, height: 90)
@@ -48,8 +50,8 @@ struct CartView: View {
                     .padding(30)
                     
                     // Cart Products
-                    VStack {
-                        ForEach(productList) { item in
+                    VStack(spacing: 20) {
+                        ForEach(cartManager.products, id: \.name) { item in
                             CartProductCard(product: item)
                         }
                     }
@@ -60,7 +62,7 @@ struct CartView: View {
                         HStack {
                             Text("Delivery Amount")
                             Spacer()
-                            Text("$8.00")
+                            Text("Free")
                                 .font(.system(size: 25).weight(.semibold))
                         }
                         
@@ -69,7 +71,7 @@ struct CartView: View {
                         Text("Total Amount")
                             .font(.system(size: 25))
                         
-                        Text("USD 36.00")
+                        Text("USD \(cartManager.total)")
                             .font(.system(size: 36).weight(.semibold))
                     }
                     .padding(30)
@@ -97,11 +99,13 @@ struct CartView: View {
                 }
             }
         }
+        .navigationBarHidden(true)
     }
 }
 
 #Preview {
     CartView()
+        .environmentObject(CartManager())
 }
 
 // Cart Product View

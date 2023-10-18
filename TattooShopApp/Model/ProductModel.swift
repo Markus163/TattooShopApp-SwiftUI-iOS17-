@@ -7,14 +7,24 @@
 
 import SwiftUI
 
-struct ProductModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+// Product Model
+struct Product: Identifiable {
+    var id: UUID = .init()
+    var name: String
+    var category: String
+    var image: String
+    var color: Color
+    var price: Int
 }
 
-struct ProductModel_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductModel()
-    }
-}
+// Sample Products
+var productList: [Product] = [
+    Product(name: "WF Blackout", category: "Black", image: "Blackout", color: .black, price: 20),
+    Product(name: "WF Dubai Gold", category: "Yellow", image: "Dubai", color: .yellow, price: 12),
+    Product(name: "WF Everglades Green", category: "Green", image: "Everglades", color: .green, price: 12),
+    Product(name: "WF Legendary", category: "Black", image: "Legendary", color: .black, price: 28),
+    Product(name: "WF Great Wall Yellow", category: "Yellow", image: "Great", color: .red, price: 12),
+    Product(name: "WF Emerald", category: "Green", image: "Emerald", color: .brown, price: 13),
+    Product(name: "WF Canary Yellow", category: "Yellow", image: "Canary", color: .yellow, price: 12),
+    Product(name: "WF Vegas Green", category: "Green", image: "Vegas", color: .mint, price: 12)
+]
